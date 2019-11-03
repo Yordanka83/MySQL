@@ -1,0 +1,449 @@
+1 задача
+CREATE TABLE `minions` (
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(30) NOT NULL,
+`age` INT,
+);
+CREATE TABLE `towns`(
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(30)
+);
+2 задача
+ALTER TABLE `minions`
+ADD COLUMN `town_id` INT NOT NULL;
+
+ALTER TABLE `minions`
+ADD CONSTRAINT fk_minions_towns FOREIGN KEY (`town_id`) REFERENCES `towns` (`id`);
+3 задача
+INSERT INTO `towns` (id, name) VALUES (1, 'Sofia');
+INSERT INTO `towns` (id, name) VALUES (2, 'Plovdiv');
+INSERT INTO `towns` (id, name) VALUES (3, 'Varna');
+
+INSERT INTO `minions` (id, name, age, town_id) VALUES (1, 'Kevin', 22, 1);
+INSERT INTO `minions` (id, name, age, town_id) VALUES (2, 'Bob', 15, 3);
+INSERT INTO `minions` (id, name, age, town_id) VALUES (3, 'Steward', NULL, 2);
+4 задача
+TRUNCATE TABLE `minions`;
+5 задача
+DROP TABLE `minions`;
+DROP TABLE `towns`;
+6 задача
+CREATE TABLE `people`(
+`id` INT PRIMARY KEY AUTO_INCREMENT, `name` VARCHAR (200) NOT NULL, `picture` BLOB , `height` DOUBLE, `weight` DOUBLE , 
+`gender` VARCHAR(1) NOT NULL, `birthdate` DATETIME NOT NULL, `biography` VARCHAR (30) );
+На тази изкаравам 88 точки да питам къде може да ми е грешката?
+
+7 задача
+
+
+
+
+CREATE TABLE `minions` (
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(30) NOT NULL,
+`age` INT,
+);
+CREATE TABLE `towns`(
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(30)
+);
+ALTER TABLE `minions`
+ADD COLUMN `town_id` INT NOT NULL;
+
+ALTER TABLE `minions`
+ADD CONSTRAINT fk_minions_towns FOREIGN KEY (`town_id`) REFERENCES `towns` (`id`);
+
+INSERT INTO `towns` (id, name) VALUES (1, 'Sofia');
+INSERT INTO `towns` (id, name) VALUES (2, 'Plovdiv');
+INSERT INTO `towns` (id, name) VALUES (3, 'Varna');
+
+INSERT INTO `minions` (id, name, age, town_id) VALUES (1, 'Kevin', 22, 1);
+INSERT INTO `minions` (id, name, age, town_id) VALUES (2, 'Bob', 15, 3);
+INSERT INTO `minions` (id, name, age, town_id) VALUES (3, 'Steward', NULL, 2);
+
+TRUNCATE TABLE `minions`;
+DROP TABLE `minions`;
+DROP TABLE `towns`;
+
+CREATE TABLE `people`(
+`id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL, `name` VARCHAR (200) NOT NULL,
+`picture` BLOB, `height` DOUBLE(5,2), `weight` DOUBLE(5,2) , 
+`gender` ENUM('m', 'f') NOT NULL, `birthdate` DATE NOT NULL, `biography` TEXT );
+
+INSERT INTO `people` (id, name, picture, height, weight, gender, birthdate, biography)
+VALUES
+(1, 'pesho', NULL, 1.80, 45.00, 'm', '1980-03-12', 'az sam ok' ),
+(2, 'ivanka', NULL, 1.50, 66.00, 'f', '1985-03-11', 'az sam ivan' ),
+(3, 'peta', NULL, 1.60, 69.00, 'f', '1983-06-10', 'az sam ivan' ),
+(4, 'dada', NULL, 1.70, 67.00, 'f', '1981-07-10', 'az sam ivan' ),
+(5, 'iva', NULL, 1.75, 68.00, 'f', '1970-02-22', 'az sam ivan' );
+
+SELECT * FROM `people`;
+
+CREATE DATABASE pesho_db;
+
+USE pesho_db;
+
+
+CREATE TABLE `users` (
+`id` INT PRIMARY KEY AUTO_INCREMENT, `username` VARCHAR (30) NOT NULL unique,
+`password` VARCHAR (26) NOT NULL, `profile_picture` BLOB (900),
+`last_login_time` DATETIME, `is_deleted` BIT);
+
+INSERT INTO `users` (id, username, password, profile_picture, last_login_time, is_deleted)
+VALUES
+(1, 'daca', 'vlad', NULL, date(now()), 1),
+(2, 'mucka', 'lllll', NULL, date(now()), 0),
+(3, 'maca', 'vvvv', NULL, date(now()), 1),
+(4, 'pencho', 'comp', NULL, date(now()), 0),
+(5, 'nnnn', 'popop', NULL, date(now()), 1);
+
+SELECT * FROM `users`;
+
+ALTER TABLE users
+MODIFY COLUMN id INT (11);
+
+ALTER TABLE users
+DROP PRIMARY KEY;
+
+ALTER TABLE users
+ADD PRIMARY KEY (id, username);
+
+ALTER TABLE users
+MODIFY COLUMN `last_login_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `users`DROP PRIMARY KEY,
+ADD CONSTRAINT pk_id PRIMARY KEY(id),
+ADD CONSTRAINT uq_username UNIQUE(username);
+
+
+CREATE DATABASE `movies`;
+USE `movies`;
+
+CREATE TABLE `directors`(
+`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`director_name` VARCHAR (250) NOT NULL,
+`notes` TEXT);
+
+INSERT INTO directors (id, director_name, notes)
+VALUES 
+(1, 'Ivan Ivanov', 'da napravq'),
+(2, 'Dimitar Parvanov', 'napravi tova'),
+(3, 'Petar Yordanov', 'da kupq'),
+(4, 'Angel Angelov', 'molivi'),
+(5, 'Milena Yordanova', 'tebishiri');
+
+SELECT * FROM directors;
+
+CREATE TABLE `genres`(
+`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`genre_name` VARCHAR (250) NOT NULL,
+`notes` TEXT);
+
+INSERT INTO `genres` (id, genre_name, notes)
+VALUES 
+(1, 'Ivan Ivanov', 'da napravq'),
+(2, 'Dimitar Parvanov', 'napravi tova'),
+(3, 'Petar Yordanov', 'da kupq'),
+(4, 'Angel Angelov', 'molivi'),
+(5, 'Milena Yordanova', 'tebishiri');
+
+SELECT * FROM `genres`;
+
+CREATE TABLE `categories`(
+`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`category_name` VARCHAR (250) NOT NULL,
+`notes` TEXT);
+
+INSERT INTO `categories` (id, category_name, notes)
+VALUES 
+(1, 'Ivan Ivanov', 'da napravq'),
+(2, 'Dimitar Parvanov', 'napravi tova'),
+(3, 'Petar Yordanov', 'da kupq'),
+(4, 'Angel Angelov', 'molivi'),
+(5, 'Milena Yordanova', 'tebishiri');
+
+SELECT * FROM categories;
+
+
+CREATE TABLE `movies`(
+`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`title` VARCHAR (250) NOT NULL,
+`director_id` INT,
+`copyright_year` YEAR NOT NULL,
+`length` DOUBLE,
+`genre_id` INT,
+`category_id` INT,
+`rating` INT,
+`notes` TEXT);
+
+INSERT INTO `movies`
+(id, title, copyright_year, length, rating, notes)
+VALUES
+(1, 'Napravi sam', 1960, 23.0, 10, 'tova onova'),
+(2, 'Onova mmm', 2012, 250.0, 6, 'mishka'),
+(3, 'Mama', 33, 2015, 8.0, 'zaek'),
+(4, 'Nanana', 2012, 300.0, 9, 'kaka'),
+(5, 'Nasa', 1985, 100.0, 6, 'onova');
+SELECT * FROM `movies`;
+
+
+
+CREATE DATABASE `car_rental`;
+USE `car_rental`;
+
+CREATE TABLE `categories`(
+`id`  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`category` VARCHAR (250) NOT NULL,
+`daily_rate` DOUBLE,
+`weekly_rate` DOUBLE,
+`monthly_rate` DOUBLE,
+`weekend_rate` DOUBLE);
+ 
+ INSERT INTO `categories` (id, category)
+ VALUES
+ (1, 'за път' ),
+ (2, 'за товар' ),
+ (3, 'за пътешествия' );
+ SELECT * FROM `categories`;
+ 
+ CREATE TABLE `cars`
+ (`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ `plate_number` VARCHAR (10) NOT NULL,
+ `make` VARCHAR (50),
+ `model`VARCHAR (50),
+ `car_year` YEAR NOT NULL,
+ `category_id` INT,
+ `doors` INT NOT NULL,
+ `picture` BLOB,
+ `car_condition` VARCHAR (100),
+ `available` VARCHAR (20) NOT NULL);
+
+INSERT INTO `cars`(id, plate_number, model, car_year, doors, picture, available)
+VALUES
+(1, 'VK1563MM', 'audi', 2002, 4, NULL, 'da'),
+(2, 'BT1970MN', 'BMV', 2012, 5, NULL, 'ne'),
+(3, 'VK1563MM', 'shkoda', 2005, 4, NULL, 'da');
+SELECT * FROM `cars`;
+  
+ CREATE TABLE `employees`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ `first_name` VARCHAR (100) NOT NULL,
+ `last_name` VARCHAR (100) NOT NULL,
+ `title` TEXT,
+ `notes` TEXT);
+ 
+INSERT INTO `employees` (id, first_name, last_name)
+VALUES
+(1, 'Ivan', 'Ivanov'),
+(2, 'Petar', 'Petrov'),
+(3, 'Misha', 'Ivanova');
+SELECT * FROM `employees`;
+
+CREATE TABLE `customers`
+(`id`INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`driver_licence_number` VARCHAR (250) NOT NULL,
+`full_name` VARCHAR (150) NOT NULL,
+ `address` TEXT, 
+ `city` VARCHAR (250),
+ `zip_code`INT, 
+ `notes` TEXT);
+ 
+ INSERT INTO `customers` (id, driver_licence_number, full_name)
+ VALUES
+ (1, '12545KDJDF365', 'Petkan'),
+ (2, '35545KDJDF365', 'Ivan'),
+ (3, '54547KDJDF365', 'Mitlo');
+ SELECT * FROM `customers`;
+
+CREATE TABLE `rental_orders`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `employee_id` INT, `customer_id` INT, 
+`car_id` INT, `car_condition` VARCHAR (30) , `tank_level` INT, 
+`kilometrage_start` DOUBLE NOT NULL, `kilometrage_end` DOUBLE NOT NULL, 
+`total_kilometrage` DOUBLE NOT NULL, `start_date` DATE NOT NULL,  `end_date` DATE NOT NULL,
+`total_days` INT NOT NULL, `rate_applied` DOUBLE NOT NULL, `tax_rate` DOUBLE NOT NULL,
+ `order_status` TEXT, `notes` TEXT);
+
+INSERT INTO `rental_orders`
+(id, kilometrage_start, kilometrage_end, total_kilometrage, start_date, end_date, total_days, rate_applied, tax_rate)
+ VALUES
+ (1, 250.00, 350.00, 1350.00, '2019-06-22', '2019-06-23', 1, 0.2, 0.3),
+ (2, 350.00, 550.00, 1550.00, '2019-06-24', '2019-06-27', 3, 0.2, 0.3),
+ (3, 550.00, 750.00, 1750.00, '2019-06-28', '2019-06-30', 3, 0.2, 0.3);
+ SELECT * FROM `rental_orders`;
+ 
+ CREATE DATABASE `Hotel`;
+ USE `Hotel`;
+ 
+ CREATE TABLE `employees`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ `first_name` VARCHAR (250) NOT NULL, `last_name` VARCHAR (250) NOT NULL, 
+ `title` TEXT, `notes` TEXT);
+ 
+ INSERT INTO `employees` (id, first_name, last_name)
+ VALUES
+ (1, 'Ivan', 'Ivanov'),
+ (2, 'Petar', 'Petrov'),
+ (3, 'Misha', 'Ivanova');
+SELECT * FROM `employees`;
+
+CREATE TABLE `customers`
+(`account_number` INT PRIMARY KEY NOT NULL, `first_name` VARCHAR (250) NOT NULL,
+ `last_name` VARCHAR (250) NOT NULL, `phone_number` INT NOT NULL, `emergency_name` VARCHAR (250),
+`emergency_number` VARCHAR (250), `notes`  TEXT);
+
+INSERT INTO `customers`
+(account_number, first_name, last_name, phone_number)
+VALUES
+(1, 'Ivan', 'Ivanov', 088855555),
+(2, 'Petar', 'Petrov', 085555544),
+(3, 'Misha', 'Ivanova', 054684510);
+SELECT * FROM `customers`;
+
+CREATE TABLE `room_status` (`room_status` INT PRIMARY KEY NOT NULL, `notes` TEXT);
+INSERT INTO `room_status`(room_status)
+VALUES
+ (1),
+ (2),
+ (3);
+SELECT * FROM `room_status`;
+
+CREATE TABLE `room_types` (`room_type` INT PRIMARY KEY  NOT NULL, `notes` TEXT);
+INSERT INTO `room_types`(room_type)
+VALUES 
+(1),
+(2),
+(3);
+SELECT * FROM `room_types`;
+
+CREATE TABLE `bed_types` (`bed_type` INT PRIMARY KEY  NOT NULL, `notes` TEXT);
+INSERT INTO `bed_types`(bed_type)
+VALUES 
+(1),
+(2),
+(3);
+SELECT * FROM `bed_types`;
+
+CREATE TABLE `rooms` (`room_number` INT PRIMARY KEY NOT NULL, `room_type` TEXT NOT NULL, 
+`bed_type` TEXT NOT NULL, `rate` DOUBLE, `room_status` TEXT NOT NULL, notes TEXT);
+INSERT INTO `rooms` 
+(room_number, room_type, bed_type, room_status)
+VALUES 
+(2530, 'single', 'single', 'free'),
+(3030, 'double', 'double', 'ne'),
+(1000, 'apartament', 'double', 'ne');
+SELECT * FROM `rooms`;
+
+CREATE TABLE `payments` (`id` INT PRIMARY KEY NOT NULL, `employee_id` INT, 
+`payment_date` DATE NOT NULL, `account_number` INT NOT NULL, `first_date_occupied` DATE NOT NULL, 
+ `last_date_occupied` DATE NOT NULL, `total_days` INT NOT NULL, `amount_charged` DOUBLE, 
+ `tax_rate` DOUBLE, `tax_amount` DOUBLE, `payment_total` DOUBLE, `notes` TEXT);
+ 
+INSERT INTO `payments` (id, payment_date,  account_number, first_date_occupied, last_date_occupied, total_days )
+VALUES
+(1, '2019-05-28', 2222,  '2019-08-22', '2019-08-25', 3),
+(2, '2019-05-25', 3333,  '2019-08-27', '2019-08-30', 3),
+(3, '2019-05-29', 5555,  '2019-08-20', '2019-08-22', 2);
+SELECT * FROM `payments`; 
+
+CREATE TABLE `occupancies`
+(`id` INT PRIMARY KEY NOT NULL, `employee_id` INT, `date_occupied` DATE NOT NULL,
+ `account_number` VARCHAR(250) NOT NULL, `room_number` INT, `rate_applied` DOUBLE,
+`phone_charge` INT, `notes` TEXT);
+
+INSERT INTO `occupancies` 
+(id, date_occupied, account_number)
+VALUES
+(1, '2019-05-28', 'BG20IORT33002200'),
+(2, '2019-05-25', 'BG30IORT33002200'),
+(3, '2019-05-29', 'BG10IORT33002200');
+SELECT * FROM `occupancies`;
+
+
+
+CREATE DATABASE `soft_uni`;
+USE `soft_uni`;
+
+CREATE TABLE `towns`(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `name` VARCHAR(250));
+INSERT INTO `towns` (id)
+VALUES
+(1), 
+(2), 
+(3), 
+(4), 
+(5); 
+
+SELECT * FROM `towns`;
+
+CREATE TABLE `addresses`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `address_text` VARCHAR(250) NOT NULL, `town_id` INT);
+INSERT INTO `addresses` (id, address_text)
+VALUES
+(1, 'Veliko Tarnovo, Al.35'),
+(2, 'Veliko Tarnovo, Kachica 25'),
+(3, 'Sofia, Sredec 28'),
+(4, 'Bqla, Popov 75'),
+(5, 'Varna, Mariq 15');
+SELECT * FROM `addresses`;
+
+
+CREATE TABLE `departments`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `name` VARCHAR (250));
+INSERT INTO `departments`(id)
+VALUES 
+(1), 
+(2), 
+(3), 
+(4), 
+(5); 
+
+SELECT * FROM `departments`;
+
+CREATE TABLE `employees`
+(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `first_name` VARCHAR(250) NOT NULL,
+ `middle_name` VARCHAR(250) NOT NULL, `last_name` VARCHAR (250) NOT NULL, `job_title` TEXT NOT NULL,
+ `department_id` INT, `hire_date` DATE, `salary` DOUBLE NOT NULL, `address_id` INT); 
+INSERT INTO `employees` (id, first_name, middle_name,  last_name, job_title, salary )
+VALUES
+(1, 'Ivan','Ivanov','Ivanov', '.NET Developer', 3500.00),
+(2, 'Vanina','Ivanov','Daskaova', 'Senior Engineer', 4000.00),
+(3, 'Nina','Ivanov', 'Angelov', 'Intern', 525.25),
+(4, 'Pufa','Ivanov','Yordavanov', 'CEO', 3000),
+(5, 'Mimi', 'Ivanov', 'Ivanova', 'Intern', 599.88);
+SELECT * FROM `employees`;
+
+
+
+INSERT INTO `towns` (name) 
+VALUES ('Sofia'), ('Plovdiv'), ('Varna'), ('Burgas');
+SELECT * FROM `towns`;
+
+
+INSERT INTO `departments` (name)
+VALUES
+('Engineering'), ('Sales'), ('Marketing'), ('Software Development'), ('Quality Assurance');
+
+INSERT INTO `employees` (name, job_title, department, hire_date, salary)
+VALUES
+('Ivan ')
+
+
+
+
+SELECT t.name FROM `towns` AS t ORDER BY t.name;
+SELECT d.name FROM `departments` AS d ORDER BY d.name;
+SELECT e.first_name, e.last_name, e.job_title, e.salary 
+FROM `employees` AS e ORDER BY e.salary DESC;
+
+UPDATE `employees` as e SET `salary` = e.salary + e.salary * 0.1;
+SELECT e.salary FROM `employees` as e;
+
+UPDATE `payments` as e SET `tax_rate` = e.tax_rate - e.tax_rate * 0.03;
+SELECT e.tax_rate FROM `payments` as e;
+
+DELETE FROM occupancies;
+
+
+
+
+
